@@ -1,6 +1,6 @@
 {% set name = "makefun" %}
 {% set version = "1.15.0" %}
-
+{% set sha256 = "5b110e733d94f7a49d8ac27b1e2d40f2bb0501e98c1d825e0d932d26920dd5df" %}
 
 package:
   name: {{ name|lower }}
@@ -8,21 +8,21 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/makefun-{{ version }}.tar.gz
-  sha256: 5b110e733d94f7a49d8ac27b1e2d40f2bb0501e98c1d825e0d932d26920dd5df
+  sha256: {{ sha256 }}
 
 build:
-  noarch: python
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - pytest-runner
-    - python >=3.5
+    - python
+    - setuptools >=39.2
     - setuptools_scm
+    - wheel
   run:
-    - python >=3.5
+    - python
 
 test:
   imports:
@@ -43,6 +43,7 @@ about:
     your choice. It was largely inspired by `decorator` and `functools`, and
     created mainly to cover some of their limitations.
   doc_url: https://smarie.github.io/python-makefun
+  doc_source_url: https://github.com/smarie/python-makefun/tree/main/docs
   dev_url: https://github.com/smarie/python-makefun
 
 extra:
