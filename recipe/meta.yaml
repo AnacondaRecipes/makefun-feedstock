@@ -21,6 +21,8 @@ requirements:
     - pytest-runner
     - python
     - setuptools_scm
+    - setuptools
+    - wheel
   run:
     - python
 
