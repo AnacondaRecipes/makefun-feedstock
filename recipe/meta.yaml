@@ -18,7 +18,7 @@ build:
 requirements:
   host:
     - pip
-    - pytest-runner
+    - pytest-runner 6.0.0
     - python
     - setuptools_scm
     - setuptools
