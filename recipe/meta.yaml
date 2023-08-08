@@ -11,18 +11,19 @@ source:
   sha256: 40b0f118b6ded0d8d78c78f1eb679b8b6b2462e3c1b3e05fb1b2da8cd46b48a5
 
 build:
-  noarch: python
+  skip: true  # [py<35]
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
-    - pytest-runner
-    - python >=3.5
+    - python
     - setuptools_scm
+    - setuptools
+    - wheel
   run:
-    - python >=3.5
+    - python
 
 test:
   imports:
