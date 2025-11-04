@@ -18,7 +18,9 @@ requirements:
     - pip
     - python
     - setuptools_scm
-    - setuptools >=39.2,<72
+    # relaxed upper bound, setuptools <72 is not available in the main channel for py313
+    - setuptools >=39.2,<72  # [py<313]
+    - setuptools >=39.2,<74  # [py>=313]
     - wheel
   run:
     - python
