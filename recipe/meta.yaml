@@ -1,16 +1,15 @@
 {% set name = "makefun" %}
-{% set version = "1.15.6" %}
+{% set version = "1.16.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/makefun-{{ version }}.tar.gz
-  sha256: 26bc63442a6182fb75efed8b51741dd2d1db2f176bec8c64e20a586256b8f149
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: e14601831570bff1f6d7e68828bcd30d2f5856f24bad5de0ccb22921ceebc947
 
 build:
-  skip: true  # [py<35]
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -19,7 +18,9 @@ requirements:
     - pip
     - python
     - setuptools_scm
-    - setuptools
+    # relaxed upper bound, setuptools <72 is not available in the main channel for py313
+    - setuptools >=39.2,<72  # [py<313]
+    - setuptools >=39.2,<74  # [py>=313]
     - wheel
   run:
     - python
@@ -31,10 +32,11 @@ test:
     - makefun
   commands:
     - pip check
-    - pytest
+    - pytest --asyncio-mode=auto
   requires:
     - pip
     - pytest
+    - pytest-asyncio
 
 about:
   home: https://github.com/smarie/python-makefun
